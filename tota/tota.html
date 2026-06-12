@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محكمة البلوك   ⚖️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="VID- BE 20260612062705.mp3" type="audio/mpeg">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+
+    <div class="container">
+        
+        <div id="password-page" class="page active">
+            <div class="icon">🔒</div>
+            <h2>هذا الموقع خاص جداً</h2>
+            <p>الرجاء إدخال كلمة السر المخصصة لكِ للدخول ورؤية محتوى الجلسة السرية:</p>
+            
+            <div class="password-container">
+                <input type="password" id="pass-input" placeholder="اكتبي كلمة السر هنا...">
+                <p id="error-msg" style="color: #e74c3c; font-size: 0.9rem; display: none; margin-top: 5px;">كلمة السر غير صحيحة، حاولي تاني! 🤫</p>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-success" style="width: 100%; flex: none;" onclick="checkPassword()">دخول  ✨</button>
+            </div>
+        </div>
+
+        <div id="page1" class="page">
+            <div class="icon">⚖️</div>
+            <h2>محكمة البلوك </h2>
+            <p>جلسة الاستئناف رقم 101 المنعقدة لبحث قضية الحظر المفاجئ.. الرجاء النظر إلى المتهم بعين الرأفة والعدل! 🏛️</p>
+            
+            <div class="btn-container">
+                <button class="btn btn-success" onclick="acceptAppeal()">موافقة على العفو ✨</button>
+                <button class="btn btn-danger" onclick="nextPage(2)">رفض الاستئناف ❌</button>
+            </div>
+        </div>
+
+        <div id="page2" class="page">
+            <div class="icon">❓</div>
+            <h2>سؤال مهم!</h2>
+            <p>تفتكري أنا عامل الويب سايت ده كله وضارب كودين عشان إيه؟ 🤔</p>
+            
+            <div class="quiz-options">
+                <label class="option-card">
+                    <input type="radio" name="quiz" value="1">
+                    <span>عشان معجب بجد ومش مستسلم بسهولة 🎯</span>
+                </label>
+                <label class="option-card">
+                    <input type="radio" name="quiz" value="2">
+                    <span>عشان الواتساب ضلم من بعد البلوك 🌌</span>
+                </label>
+                <label class="option-card">
+                    <input type="radio" name="quiz" value="3">
+                    <span>كل ما سبق + بطلب فرصة تانية نتكلم شات بس 🤝</span>
+                </label>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn btn-success" onclick="acceptAppeal()">فك الحظر واخلص 😅</button>
+                <button class="btn btn-danger" onclick="nextPage(3)">لسه برضه ❌</button>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <div class="icon">✉️</div>
+            <h2>رسالة من القلب..</h2>
+            <div class="romantic-message">
+                <p>أنا فعلاً شخص مهتم بيكي ومعجب بطريقتك وتفاصيلك جداً.. مكنتش حابب إن كلامنا ينتهي بالطريقة دي أو أكون سببتلك أي إزعاج بسب تسرعي على الواتساب.</p>
+                <p>عملت الويب سايت ده بس عشان أعبرلك عن إعجابي بشكل مختلف ومفيهوش أي ضغط عليكي.. حابب بجد لو تديني فرصة ثانية صغننة نبدأ فيها نتعرف براحتنا ومن غير أي تسرع. القرار الأول والأخير ليكي طبعاً.. ✨</p>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-success" onclick="acceptAppeal()">موافقة أسمعك ونبدأ شات 💬</button>
+                <button class="btn btn-danger" onclick="nextPage(4)">مش موافقة برضه ❌</button>
+            </div>
+        </div>
+
+        <div id="page4" class="page">
+            <div class="icon">🔒</div>
+            <h2 class="no-escape-title">خلاص مفيش مفر! 😂🙋‍♂️</h2>
+            <p>لفيتي الموقع كله وبرضه عمالة تدوسي رفض؟ تؤتؤ، الخطة "ب" نجحت والسيستم قفل عليكي ومفيش بره.. الزرار اللي تحت ده هو طريقك الوحيد للحرية المستقلة!</p>
+            
+            <div class="btn-container">
+                <button class="btn btn-success" style="width: 100%; flex: none;" onclick="acceptAppeal()">فك البلوك بسلام وأمان 🕊️</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let bubbleInterval; 
+
+        // دالة التحقق من الباسورد وتشغيل الأغنية
+        function checkPassword() {
+            const enteredPass = document.getElementById('pass-input').value.trim();
+            const correctPass = "tota"; // عـدّل الباسورد اللي إنت عايزه من هنا
+            const errorMsg = document.getElementById('error-msg');
+            const audio = document.getElementById('bg-music');
+
+            if (enteredPass.toLowerCase() === correctPass.toLowerCase()) {
+                errorMsg.style.display = "none";
+                
+                // تشغيل الأغنية في الباك جراوند فوراً
+                audio.play().catch(error => console.log("خطأ في تشغيل الصوت:", error));
+
+                // الانتقال لصفحة المحكمة الأولى
+                document.getElementById('password-page').classList.remove('active');
+                document.getElementById('page1').classList.add('active');
+            } else {
+                errorMsg.style.display = "block";
+            }
+        }
+
+        function nextPage(pageNumber) {
+            document.querySelector('.page.active').classList.remove('active');
+            
+            const nextPage = document.getElementById('page' + pageNumber);
+            if(nextPage) {
+                nextPage.classList.add('active');
+            }
+
+            // أجواء الصفحة الثالثة (تغيير الخلفية وبدء الفقاعات)
+            if (pageNumber === 3) {
+                document.body.style.background = "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)";
+                if (!bubbleInterval) {
+                    bubbleInterval = setInterval(createBubble, 400);
+                }
+            } 
+            // أجواء الصفحة الرابعة (مفيش مفر - الألوان تقلب والفقاعات تكمل)
+            else if (pageNumber === 4) {
+                document.body.style.background = "linear-gradient(135deg, #2c3e50 0%, #000000 100%)"; 
+                document.querySelector('.container').style.borderColor = "#e74c3c"; 
+                if (!bubbleInterval) {
+                    bubbleInterval = setInterval(createBubble, 400);
+                }
+            }
+        }
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.innerText = 'tota'; 
+            const size = Math.random() * 60 + 40; 
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${Math.random() * 100}vw`;
+            bubble.style.animationDuration = `${Math.random() * 4 + 4}s`; 
+            document.body.appendChild(bubble);
+            setTimeout(() => { bubble.remove(); }, 8000);
+        }
+
+        function acceptAppeal() {
+            const myPhoneNumber = "201000000000"; // اكتب رقمك هنا بكود الدولة
+            const message = encodeURIComponent("خلاص فكيت البلوك يا سيدي، اتفضل قول اللي عندك! 😉");
+            window.location.href = `https://wa.me/${+201040791377}?text=${ امم    }`;
+        }
+    </script>
+</body>
+</html>
